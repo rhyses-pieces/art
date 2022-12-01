@@ -1,16 +1,19 @@
 const fs = require("fs");
 const htmlmin = require("html-minifier");
+const vite = require("@11ty/eleventy-plugin-vite");
 
 module.exports = function(eleventyConfig) {
 
   if (process.env.ELEVENTY_PRODUCTION) {
     eleventyConfig.addTransform("htmlmin", htmlminTransform);
-  } else {
-    eleventyConfig.setBrowserSyncConfig({ callbacks: { ready: browserSyncReady }});
   }
+  
+  // Plugins
+  eleventyConfig.addPlugin(vite);
 
   // Passthrough
   eleventyConfig.addPassthroughCopy({ "src/static": "." });
+  eleventyConfig.addPassthroughCopy({ "src/static/fonts": "fonts"});
 
   // Watch targets
   eleventyConfig.addWatchTarget("./src/styles/");

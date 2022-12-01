@@ -1,7 +1,18 @@
 module.exports = {
   content: ["./src/**/*.{html,njk}"],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'title': '"Space Grotesk", sans-serif',
+      }
+    },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/typography'),
+    require('@catppuccin/tailwindcss')({
+      prefix: false,
+      defaultFlavour: 'latte',
+    })
+  ],
 };

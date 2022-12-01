@@ -1,5 +1,59 @@
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/fonts/SpaceGrotesk[wght].woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Spline Sans Mono';
+  src: url('/fonts/SplineSansMono-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Spline Sans Mono';
+  src: url('/fonts/SplineSansMono-Italic.woff2') format('woff2');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Spline Sans Mono';
+  src: url('/fonts/SplineSansMono-Bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Spline Sans Mono';
+  src: url('/fonts/SplineSansMono-BoldItalic.woff2') format('woff2');
+  font-weight: bold;
+  font-style: italic;
+}
+
 @tailwind base;
-
 @tailwind components;
-
 @tailwind utilities;
+
+@layer base {
+  html {
+    @apply bg-base text-text leading-normal;
+    font-family: 'Spline Sans Mono', monospace;
+  }
+
+  a {
+    @apply text-rosewater hover:text-subtext0;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-[650] font-title leading-tight;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply rounded bg-flamingo hover:bg-maroon focus:outline-none focus:ring focus:ring-text text-base font-title font-[550] text-xl tracking-wide px-5 py-2;
+  }
+}

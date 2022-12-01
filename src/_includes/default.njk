@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- https://github.com/joshbuchea/HEAD -->
 
     <!-- Recommended -->
     <meta charset="utf-8" />
@@ -33,11 +32,13 @@
     <link rel="manifest" href="{{ '/site.webmanifest' | url }}" />
 
     <title>{{ title or metadata.title }}</title>
+    
+    <link rel="preload" href="{{ '/fonts/SpaceGrotesk[wght].woff2' | url }}" as="font" type="font/woff2" crossorigin />
 
     <link rel="stylesheet" href="{{ '/site.css' | url }}" />
   </head>
 
-  <body class="font-sans leading-normal tracking-normal text-gray-900">
+  <body>
     {{ content | safe }}
   </body>
 </html>
