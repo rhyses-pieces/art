@@ -39,6 +39,8 @@
   </head>
 
   <body>
-    {{ content | safe }}
+    <main class="container mx-auto">
+    {% block content %}{% endblock %}
+    </main>
   </body>
 </html>

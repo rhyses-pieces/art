@@ -1,0 +1,9 @@
+{% extends "default.njk" %}
+
+{% block content %}
+  <article class="post">
+    <h1>{{ post.title }}</h1>
+    <time>{{ post.date }}</time>
+    {{ post.content | renderHtml | safe }}
+  </article>
+{% endblock %}

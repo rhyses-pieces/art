@@ -1,6 +1,11 @@
-const fs = require("fs");
 const htmlmin = require("html-minifier");
+const { DateTime } = require('luxon');
+const { EleventyRenderPlugin } = require("@11ty/eleventy");
 const vite = require("@11ty/eleventy-plugin-vite");
+const webc = require('@11ty/eleventy-plugin-webc');
+const imageShortcode = require('./src/_shortcodes/image');
+const renderShortcode = require('./src/_shortcodes/render');
+const renderHtmlFilter = require('./src/_filters/renderHtml');
 
 module.exports = function(eleventyConfig) {
 
@@ -10,6 +15,18 @@ module.exports = function(eleventyConfig) {
   
   // Plugins
   eleventyConfig.addPlugin(vite);
+  eleventyConfig.addPlugin(EleventyRenderPlugin);
+  eleventyConfig.addPlugin(webc, {
+    components: "_includes/**/*.webc",
+  });
+
+  // Shortcodes
+  eleventyConfig.addNunjucksAsyncShortcode("image", imageShortcode);
+  eleventyConfig.addNunjucksAsyncShortcode("render", async (content) => renderShortcode(content, eleventyConfig));
+
+  // Filters
+  eleventyConfig.addAsyncFilter("renderHtml", async (content) => await renderHtmlFilter(content, eleventyConfig));
+  eleventyConfig.addFilter("readableDate", dateObj => {return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat("dd LLL yyyy")});
 
   // Passthrough
   eleventyConfig.addPassthroughCopy({ "src/static": "." });
@@ -27,20 +44,11 @@ module.exports = function(eleventyConfig) {
     dir: {
       input: "src"
     },
-    pathPrefix
+    pathPrefix,
+    markdownTemplateEngine: "njk",
+    htmlTemplateEngine: "njk",
   }
 };
-
-function browserSyncReady(err, bs) {
-  bs.addMiddleware("*", (req, res) => {
-    const content_404 = fs.readFileSync('_site/404.html');
-    // Add 404 http status code in request header.
-    res.writeHead(404, { "Content-Type": "text/html; charset=ETF-8" });
-    // Provides the 404 content without redirect.
-    res.write(content_404);
-    res.end();
-  });
-}
 
 function htmlminTransform(content, outputPath) {
   if( outputPath.endsWith(".html") ) {

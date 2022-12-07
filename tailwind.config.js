@@ -3,6 +3,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
+        'body': 'Minipax, serif',
         'title': '"Space Grotesk", sans-serif',
       }
     },

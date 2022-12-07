@@ -1,36 +1,32 @@
 @font-face {
   font-family: 'Space Grotesk';
-  src: url('/fonts/SpaceGrotesk[wght].woff2') format('woff2');
+  src: url('/fonts/SpaceGrotesk[wght].woff2') format('woff2-variations');
   font-weight: 100 900;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Spline Sans Mono';
-  src: url('/fonts/SplineSansMono-Regular.woff2') format('woff2');
+  font-family: 'Minipax';
+  src: url('/fonts/Minipax-Regular.woff2') format('woff2');
   font-weight: normal;
-  font-style: normal;
 }
 
 @font-face {
-  font-family: 'Spline Sans Mono';
-  src: url('/fonts/SplineSansMono-Italic.woff2') format('woff2');
-  font-weight: normal;
-  font-style: italic;
+  font-family: 'Minipax';
+  src: url('/fonts/Minipax-Medium.woff2') format('woff2');
+  font-weight: 500;
 }
 
 @font-face {
-  font-family: 'Spline Sans Mono';
-  src: url('/fonts/SplineSansMono-Bold.woff2') format('woff2');
+  font-family: 'Minipax';
+  src: url('/fonts/Minipax-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'Minipax';
+  src: url('/fonts/Minipax-Bold.woff2') format('woff2');
   font-weight: bold;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Spline Sans Mono';
-  src: url('/fonts/SplineSansMono-BoldItalic.woff2') format('woff2');
-  font-weight: bold;
-  font-style: italic;
 }
 
 @tailwind base;
@@ -39,12 +35,11 @@
 
 @layer base {
   html {
-    @apply bg-base text-text leading-normal;
-    font-family: 'Spline Sans Mono', monospace;
+    @apply bg-base text-text leading-normal font-body;
   }
 
   a {
-    @apply text-rosewater hover:text-subtext0;
+    @apply text-rosewater hover:text-subtext0 border-b-2 border-lavender hover:border-transparent pb-0.5 font-medium tracking-wider transition duration-300 ease-in-out;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -54,6 +49,35 @@
 
 @layer components {
   .btn {
-    @apply rounded bg-flamingo hover:bg-maroon focus:outline-none focus:ring focus:ring-text text-base font-title font-[550] text-xl tracking-wide px-5 py-2;
+    @apply rounded bg-lavender hover:bg-mauve focus:outline-none focus:ring focus:ring-text text-base font-title font-[550] text-xl tracking-wide px-5 py-2;
   }
+
+  .label {
+    @apply text-subtext0 font-medium text-xl tracking-wide mt-2;
+  }
+
+  .text-input {
+    @apply rounded bg-surface0 border-overlay0 focus:ring-overlay2 focus:border-overlay2 font-title font-[475] text-xl text-text;
+  }
+
+  .post {
+    @apply prose lg:prose-xl text-text mx-auto my-5;
+  }
+
+  .post h1, h2, h3 {
+    @apply text-subtext1;
+  }
+
+  .post time {
+    @apply text-subtext0;
+  }
+
+  .gallery .title {
+    @apply text-center text-3xl mt-4 mb-2;
+  }
+
+  .gallery .title a {
+    @apply font-bold hover:font-medium text-mauve hover:text-subtext0;
+  }
+
 }

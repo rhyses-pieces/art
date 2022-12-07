@@ -1,0 +1,17 @@
+{% extends "default.njk" %}
+
+{% block content %}
+  <ul class="grid grid-cols-3 gap-4 my-5">
+    {% set posts = notion %}
+    {%- for post in posts -%}
+      <li>
+        <article class="gallery">
+        {% image post.cover, post.title %}
+        <h1 class="title">
+          <a href="/{{post.title | slug}}/">{{post.title}}</a>
+        </h1>
+        </article>
+      </li>
+    {%- endfor -%}
+  </ul>
+{% endblock %}
