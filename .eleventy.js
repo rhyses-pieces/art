@@ -1,24 +1,27 @@
 const htmlmin = require("html-minifier");
 const { DateTime } = require('luxon');
 const { EleventyRenderPlugin } = require("@11ty/eleventy");
+const navigation = require('@11ty/eleventy-navigation');
 const vite = require("@11ty/eleventy-plugin-vite");
-const webc = require('@11ty/eleventy-plugin-webc');
 const imageShortcode = require('./src/_shortcodes/image');
 const renderShortcode = require('./src/_shortcodes/render');
+const dateFilter = require('./src/_filters/date');
 const renderHtmlFilter = require('./src/_filters/renderHtml');
 
 module.exports = function(eleventyConfig) {
+
+  let copyOptions = {
+    debug: true,
+  }
 
   if (process.env.ELEVENTY_PRODUCTION) {
     eleventyConfig.addTransform("htmlmin", htmlminTransform);
   }
   
   // Plugins
-  eleventyConfig.addPlugin(vite);
   eleventyConfig.addPlugin(EleventyRenderPlugin);
-  eleventyConfig.addPlugin(webc, {
-    components: "_includes/**/*.webc",
-  });
+  eleventyConfig.addPlugin(navigation);
+  eleventyConfig.addPlugin(vite);
 
   // Shortcodes
   eleventyConfig.addNunjucksAsyncShortcode("image", imageShortcode);
@@ -26,10 +29,10 @@ module.exports = function(eleventyConfig) {
 
   // Filters
   eleventyConfig.addAsyncFilter("renderHtml", async (content) => await renderHtmlFilter(content, eleventyConfig));
-  eleventyConfig.addFilter("readableDate", dateObj => {return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat("dd LLL yyyy")});
+  eleventyConfig.addNunjucksFilter('date', dateFilter);
 
   // Passthrough
-  eleventyConfig.addPassthroughCopy({ "src/static": "." });
+  eleventyConfig.addPassthroughCopy({ "src/static/assets" : "assets" });
   eleventyConfig.addPassthroughCopy({ "src/static/fonts": "fonts"});
 
   // Watch targets

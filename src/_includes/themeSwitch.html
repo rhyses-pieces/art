@@ -1,0 +1,43 @@
+<form action="#" id="themeSwitch">
+  <label for="themeSwitch" class="label">Switch themes:</label><br/>
+  <select name="themeOption" class="input" id="themeOption">
+    <option value="latte">Latte</option>
+    <option value="frappe">Frappe</option>
+    <option value="macchiato">Macchiato</option>
+    <option value="mocha">Mocha</option>
+  </select>
+  <button class="btn ml-3" type="submit">Change theme</button>
+</form>
+
+<script>
+  const form = document.getElementById('themeSwitch');
+  const select = form.elements['themeOption'];
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    document.body.className = select.value;
+
+    if (document.body.classList.contains(select.value)) {
+      localStorage.setItem('theme', select.value);
+    } else {
+      localStorage.setItem('theme', 'latte');
+    }
+  });
+
+  function getTheme() {
+    let theme = localStorage.getItem('theme');
+
+    if (theme != null) {
+      document.body.className = theme;
+    }
+
+    for (let i, j = 0; i = select.options[j]; j++) {
+      if (i.value == theme) {
+        select.selectedIndex = j;
+        break;
+      }
+    }
+  }
+
+  getTheme();
+</script>

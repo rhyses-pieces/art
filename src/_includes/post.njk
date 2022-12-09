@@ -2,8 +2,10 @@
 
 {% block content %}
   <article class="post">
+    {% image post.cover, post.title %}
     <h1>{{ post.title }}</h1>
-    <time>{{ post.date }}</time>
+    <time>{{ post.date | date('MMMM D, YYYY') }}</time>
+    <hr />
     {{ post.content | renderHtml | safe }}
   </article>
 {% endblock %}

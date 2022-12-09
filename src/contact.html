@@ -1,0 +1,27 @@
+---
+layout: page
+title: contact
+eleventyNavigation:
+  key: contact
+  order: 4
+---
+
+<p>If you're interested in working together or have any questions, please fill out the form below.</p>
+
+<p><small><span class="text-red">*</span> = required</small></p>
+
+<form class="flex flex-col" id="contact" action="#" method="post">
+  <label class="label" for="name">Name: <small class="text-red">*</small></label>
+  <input type="text" class="input" name="name" id="name" required>
+
+  <label class="label" for="email">Email: <small class="text-red">*</small></label>
+  <input type="email" class="input" name="email" id="email" required>
+
+  <label class="label" for="subject">Subject:</label>
+  <input type="text" class="input" name="subject" id="subject">
+
+  <label class="label" for="comments">Body: <small class="text-red">*</small></label>
+  <textarea class="input" name="comments" id="comments" cols="30" rows="10" required></textarea>
+
+  <button class="btn mt-3" type="submit">Send</button>
+</form>

@@ -1,0 +1,10 @@
+<nav class="flex justify-center my-5">
+  {% set navPages = collections.all | eleventyNavigation %}
+  <ul class="flex gap-3">
+  {%- for entry in navPages %}
+    <li {% if entry.url == page.url %}class="active"{% endif %}>
+      <a href="{{ entry.url }}">{{ entry.title }}</a>
+    </li>
+  {%- endfor %}
+  </ul>
+</nav>

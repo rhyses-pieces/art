@@ -34,7 +34,7 @@
 @tailwind utilities;
 
 @layer base {
-  html {
+  body {
     @apply bg-base text-text leading-normal font-body;
   }
 
@@ -56,7 +56,7 @@
     @apply text-subtext0 font-medium text-xl tracking-wide mt-2;
   }
 
-  .text-input {
+  .input {
     @apply rounded bg-surface0 border-overlay0 focus:ring-overlay2 focus:border-overlay2 font-title font-[475] text-xl text-text;
   }
 
@@ -80,4 +80,22 @@
     @apply font-bold hover:font-medium text-mauve hover:text-subtext0;
   }
 
+  hr {
+    mask-image: url('/assets/divider.svg');
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+    -webkit-mask-image: url('/assets/divider.svg');
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: contain;
+    @apply border-none w-full h-8 bg-surface0;
+  }
+
+}
+
+@layer utilities {
+  .active {
+    @apply text-blue text-xl font-bold border-none;
+  }
 }
